@@ -19,6 +19,16 @@ def keyxor(w, index):
 def main():
     w = list('0010011010110111')
     w = list(input('Enter 16 bit Plaintext to be encrypted : '))
+    newkey = list(input('Enter a custom 32 bit key (Leave Blank to use Default Key) : '))
+
+    # Key Validation
+    if len(newkey) is not 32:
+        print('Invalid Key Length : Using Default Key')
+    elif [x != '0' and x != '1' for x in newkey]:
+        print('Invalid Key Bits : Using Default Key')
+    else:
+        global key
+        key = newkey
 
     # Plaintext Validation
     if len(w) is not 16:
