@@ -18,29 +18,13 @@ def keyxor(w, index):
     return w
 
 def main():
-    msg = list(input('Enter 16 bit Plaintext to be encrypted (Leave Blank to use Default Plaintext) : '))
-    newkey = list(input('Enter a custom 32 bit key (Leave Blank to use Default Key) : '))
-    print('The Ciphertext is : '  + spn(msg, newkey))
+    infile = open("plaintexts.txt", "r")
+    outfile = open("ciphertexts.txt", "w")
+    for line in infile.readlines():
+        msg = line
+        outfile.write(spn(msg) + '\n')
 
-def spn(msg, newkey):
-
-    # Key Validation
-    if len(newkey) is not 32:
-        print('Invalid Key Length : Using Default Key')
-    elif [x != '0' and x != '1' for x in newkey]:
-        print('Invalid Key Bits : Using Default Key')
-    else:
-        global key
-        key = newkey
-
-    # Plaintext Validation
-    if len(msg) is not 16:
-        print('Invalid Input Length : Using Default Plaintext')
-        msg = defaultmsg
-    for x in msg:
-        if x != '0' and x != '1':
-            print('Invalid Input Binary : Using Default Plaintext')
-            msg = defaultmsg
+def spn(msg):
 
     w = msg
     for i in range(0,9,4):
